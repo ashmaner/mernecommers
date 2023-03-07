@@ -30,20 +30,14 @@ app.get('/api/config/paypal', (req, res) => {
 
 app.use(errorHandler)
 
-app.use(express.static(path.join(__dirname, 'frontend/build')))
+app.use(express.static(path.join(__dirname, './frontend/build')))
 app.get('*', function (req, res) {
-  res.sendFile(path.join(__dirname, 'frontend/build', 'index.html'))
+  res.sendFile(path.join(__dirname, './frontend/build/index.html'))
 })
 const port = process.env.PORT || 5000
 
 const PORT = 5000
-if (process.env.NODE_ENV == 'production') {
-  const path = require('path')
-  app.get('/', (req, res) => {
-    app.use(express.static(path.join(__dirname, 'frontend', 'build')))
-    res.sendFile(path.join(__dirname, 'frontend', 'build', 'index.html'))
-  })
-}
+
 app.listen(process.env.PORT || PORT, () => {
   console.log(
     `Server Running in ${process.env.NODE_ENV} Mode on Port ${PORT}`.inverse,
